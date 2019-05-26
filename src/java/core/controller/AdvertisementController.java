@@ -34,10 +34,13 @@ public class AdvertisementController {
         return advertisementService.sortAdvertisements(new SortDto(minPrice, maxPrice, nrRooms, isOwner, isAgent, isNew, isOld, from));
     }
 
-    @GetMapping("/count")
+    @GetMapping("/count/{maxPrice}/{minPrice}/{nrRooms}/{isNew}/{isOld}/{isOwner}/{isAgent}")
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody
-    Long countAnnouncements() {
-        return advertisementRepository.count();
+    int countAnnouncements(@PathVariable(value = "maxPrice") Float maxPrice, @PathVariable(value = "minPrice") Float minPrice,
+                            @PathVariable(value = "nrRooms") Integer nrRooms, @PathVariable(value = "isNew") boolean isNew,
+                            @PathVariable(value = "isOld") boolean isOld, @PathVariable(value = "isOwner") boolean isOwner,
+                            @PathVariable(value = "isAgent") boolean isAgent) {
+        return advertisementService.sortAdvertisements(new SortDto(minPrice, maxPrice, nrRooms, isOwner, isAgent, isNew, isOld)).size();
     }
 }

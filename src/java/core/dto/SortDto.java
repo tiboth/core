@@ -27,6 +27,16 @@ public class SortDto {
         setNumberOfRooms(numberOfRooms);
     }
 
+    public SortDto(Float minPrice, Float maxPrice, Integer numberOfRooms, boolean soldByOwner, boolean soldByAgent, boolean isNew, boolean isOld) {
+        this.minPrice = minPrice;
+        this.maxPrice = maxPrice;
+        this.soldByOwner = soldByOwner;
+        this.soldByAgent = soldByAgent;
+        this.isNew = isNew;
+        this.isOld = isOld;
+        setNumberOfRooms(numberOfRooms);
+    }
+
     private void setNumberOfRooms(Integer numberOfRooms) {
         if(numberOfRooms < 4)
             this.numberOfRooms = numberOfRooms.toString();
