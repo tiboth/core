@@ -22,7 +22,7 @@ public class AdvertisementService {
     }
 
     public List<AdvertisementTitleDto> sortAdvertisements(SortDto sortDto) {
-        return advertisementRepository.findByPriceBetweenAndDescriptionNumberOfRoomsAndDescriptionDistributor(sortDto.getMinPrice(), sortDto.getMaxPrice(),
-                sortDto.getNumberOfRooms(), "Agentie").stream().map(advertisementHelper::mapAdvertisement).collect(Collectors.toList());
+        return advertisementRepository.findByPriceBetweenAndDescriptionNumberOfRooms(sortDto.getMinPrice(), sortDto.getMaxPrice(),
+                sortDto.getNumberOfRooms()).stream().map(advertisementHelper::mapAdvertisement).collect(Collectors.toList());
     }
 }

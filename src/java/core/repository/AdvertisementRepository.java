@@ -21,5 +21,5 @@ public interface AdvertisementRepository extends CrudRepository<Advertisement, L
 
     List<Advertisement> findAll();
 
-    List<Advertisement> findByPriceBetweenAndDescriptionNumberOfRoomsAndDescriptionDistributor(Float minPrice, Float maxPrice, String numberOfRooms, String distributor);
+    List<Advertisement> findByPriceBetweenAndDescriptionNumberOfRooms(Float minPrice, Float maxPrice, String numberOfRooms);
 }
