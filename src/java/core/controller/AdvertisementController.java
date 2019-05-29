@@ -24,7 +24,7 @@ public class AdvertisementController {
         this.advertisementRepository = advertisementRepository;
     }
 
-    @GetMapping("/{maxPrice}/{minPrice}/{nrRooms}/{isNew}/{isOld}/{isOwner}/{isAgent}/{from}")
+    @GetMapping("/{minPrice}/{maxPrice}/{nrRooms}/{isNew}/{isOld}/{isOwner}/{isAgent}/{from}")
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody
     List<AdvertisementTitleDto> getAllUsers(@PathVariable(value = "maxPrice") Float maxPrice, @PathVariable(value = "minPrice") Float minPrice,
@@ -34,7 +34,7 @@ public class AdvertisementController {
         return advertisementService.sortAdvertisements(new SortDto(minPrice, maxPrice, nrRooms, isOwner, isAgent, isNew, isOld, from));
     }
 
-    @GetMapping("/count/{maxPrice}/{minPrice}/{nrRooms}/{isNew}/{isOld}/{isOwner}/{isAgent}")
+    @GetMapping("/count/{minPrice}/{maxPrice}/{nrRooms}/{isNew}/{isOld}/{isOwner}/{isAgent}")
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody
     int countAnnouncements(@PathVariable(value = "maxPrice") Float maxPrice, @PathVariable(value = "minPrice") Float minPrice,
