@@ -6,6 +6,8 @@ import core.dto.FilterDto;
 import core.helper.AdvertisementHelper;
 import core.repository.AdvertisementRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +19,7 @@ public class AdvertisementService {
     private final AdvertisementRepository advertisementRepository;
     @Qualifier("advertisementTitleHelper")
     private final AdvertisementHelper<AdvertisementTitleDto> advertisementTitleHelper;
-    @Qualifier("advertisementTitleHelper")
+    @Qualifier("advertisementInfoHelper")
     private final AdvertisementHelper<AdvertisementInfoDto> advertisementInfoHelper;
 
     public AdvertisementService(AdvertisementRepository advertisementRepository, AdvertisementHelper<AdvertisementTitleDto> advertisementTitleHelper, AdvertisementHelper<AdvertisementInfoDto> advertisementInfoHelper) {
@@ -26,9 +28,15 @@ public class AdvertisementService {
         this.advertisementInfoHelper = advertisementInfoHelper;
     }
 
+    public Integer countNumberOfAnnouncementsFound(FilterDto filterDto) {
+        return advertisementRepository.countAdvertisementByPriceBetweenAndDescriptionNumberOfRooms(filterDto.getMinPrice(), filterDto.getMaxPrice(),
+                filterDto.getNumberOfRooms());
+    }
+
     public List<AdvertisementTitleDto> filterAdvertisements(FilterDto filterDto) {
+        Pageable pageable = PageRequest.of(filterDto.getFrom(),20);
         return advertisementRepository.findByPriceBetweenAndDescriptionNumberOfRooms(filterDto.getMinPrice(), filterDto.getMaxPrice(),
-                filterDto.getNumberOfRooms()).stream().map(advertisementTitleHelper::mapAdvertisement).collect(Collectors.toList());
+                filterDto.getNumberOfRooms(), pageable).stream().map(advertisementTitleHelper::mapAdvertisement).collect(Collectors.toList());
     }
 
     public AdvertisementInfoDto getAdvertisement(Long id) {

@@ -27,14 +27,14 @@ public class AdvertisementController {
         this.commentService = commentService;
     }
 
-    @GetMapping("/{minPrice}/{maxPrice}/{nrRooms}/{isNew}/{isOld}/{isOwner}/{isAgent}/{from}")
+    @GetMapping("/{minPrice}/{maxPrice}/{nrRooms}/{isNew}/{isOld}/{isOwner}/{isAgent}/{page}")
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody
-    List<AdvertisementTitleDto> getAllUsers(@PathVariable(value = "maxPrice") Float maxPrice, @PathVariable(value = "minPrice") Float minPrice,
-                                            @PathVariable(value = "nrRooms") Integer nrRooms, @PathVariable(value = "isNew") boolean isNew,
-                                            @PathVariable(value = "isOld") boolean isOld, @PathVariable(value = "isOwner") boolean isOwner,
-                                            @PathVariable(value = "isAgent") boolean isAgent, @PathVariable(value = "from") Integer from) {
-        return advertisementService.filterAdvertisements(new FilterDto(minPrice, maxPrice, nrRooms, isOwner, isAgent, isNew, isOld, from));
+    List<AdvertisementTitleDto> getFilteredAndPaginatedAdvertisements(@PathVariable(value = "maxPrice") Float maxPrice, @PathVariable(value = "minPrice") Float minPrice,
+                                                                      @PathVariable(value = "nrRooms") Integer nrRooms, @PathVariable(value = "isNew") boolean isNew,
+                                                                      @PathVariable(value = "isOld") boolean isOld, @PathVariable(value = "isOwner") boolean isOwner,
+                                                                      @PathVariable(value = "isAgent") boolean isAgent, @PathVariable(value = "page") Integer page) {
+        return advertisementService.filterAdvertisements(new FilterDto(minPrice, maxPrice, nrRooms, isOwner, isAgent, isNew, isOld, page));
     }
 
     @GetMapping("/count/{minPrice}/{maxPrice}/{nrRooms}/{isNew}/{isOld}/{isOwner}/{isAgent}")
@@ -44,7 +44,7 @@ public class AdvertisementController {
                             @PathVariable(value = "nrRooms") Integer nrRooms, @PathVariable(value = "isNew") boolean isNew,
                             @PathVariable(value = "isOld") boolean isOld, @PathVariable(value = "isOwner") boolean isOwner,
                             @PathVariable(value = "isAgent") boolean isAgent) {
-        return advertisementService.filterAdvertisements(new FilterDto(minPrice, maxPrice, nrRooms, isOwner, isAgent, isNew, isOld)).size();
+        return  advertisementService.countNumberOfAnnouncementsFound(new FilterDto(minPrice, maxPrice, nrRooms, isOwner, isAgent, isNew, isOld));
     }
 
     @GetMapping("{id}")

@@ -2,6 +2,7 @@ package core.repository;
 
 import core.entity.Advertisement;
 import core.entity.WebsiteName;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -23,5 +24,7 @@ public interface AdvertisementRepository extends CrudRepository<Advertisement, L
 
     List<Advertisement> findAll();
 
-    List<Advertisement> findByPriceBetweenAndDescriptionNumberOfRooms(Float minPrice, Float maxPrice, String numberOfRooms);
+    List<Advertisement> findByPriceBetweenAndDescriptionNumberOfRooms(Float minPrice, Float maxPrice, String numberOfRooms, Pageable pageable);
+
+    Integer countAdvertisementByPriceBetweenAndDescriptionNumberOfRooms(Float minPrice, Float maxPrice, String numberOfRooms);
 }
