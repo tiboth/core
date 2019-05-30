@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @NoArgsConstructor
-public class SortDto {
+public class FilterDto {
     private Float minPrice;
     private Float maxPrice;
     private String numberOfRooms;
@@ -16,7 +16,7 @@ public class SortDto {
     private boolean isOld;
     private Integer from;
 
-    public SortDto(Float minPrice, Float maxPrice, Integer numberOfRooms, boolean soldByOwner, boolean soldByAgent, boolean isNew, boolean isOld, Integer from) {
+    public FilterDto(Float minPrice, Float maxPrice, Integer numberOfRooms, boolean soldByOwner, boolean soldByAgent, boolean isNew, boolean isOld, Integer from) {
         this.minPrice = minPrice;
         this.maxPrice = maxPrice;
         this.soldByOwner = soldByOwner;
@@ -27,7 +27,7 @@ public class SortDto {
         setNumberOfRooms(numberOfRooms);
     }
 
-    public SortDto(Float minPrice, Float maxPrice, Integer numberOfRooms, boolean soldByOwner, boolean soldByAgent, boolean isNew, boolean isOld) {
+    public FilterDto(Float minPrice, Float maxPrice, Integer numberOfRooms, boolean soldByOwner, boolean soldByAgent, boolean isNew, boolean isOld) {
         this.minPrice = minPrice;
         this.maxPrice = maxPrice;
         this.soldByOwner = soldByOwner;

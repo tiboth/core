@@ -19,6 +19,8 @@ public interface AdvertisementRepository extends CrudRepository<Advertisement, L
 
     Optional<Advertisement> findByAdvertisementUrl(String url);
 
+    Optional<Advertisement> findById(Long id);
+
     List<Advertisement> findAll();
 
     List<Advertisement> findByPriceBetweenAndDescriptionNumberOfRooms(Float minPrice, Float maxPrice, String numberOfRooms);
