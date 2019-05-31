@@ -5,7 +5,7 @@ import core.entity.Advertisement;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AdvertismentInfoHelper implements AdvertisementHelper<AdvertisementInfoDto> {
+public class AdvertisementInfoHelper implements AdvertisementHelper<AdvertisementInfoDto> {
     @Override
     public AdvertisementInfoDto mapAdvertisement(Advertisement advertisement) {
         return new AdvertisementInfoDto(advertisement.getId(), advertisement.getTitle(), advertisement.getPrice(),

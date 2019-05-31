@@ -8,6 +8,6 @@ import org.springframework.stereotype.Component;
 public class AdvertisementTitleHelper implements AdvertisementHelper<AdvertisementTitleDto> {
     @Override
     public AdvertisementTitleDto mapAdvertisement(Advertisement advertisement) {
-        return new AdvertisementTitleDto(advertisement.getId(), advertisement.getTitle(), advertisement.getImageUrls().get(0));
+        return new AdvertisementTitleDto(advertisement.getId(), advertisement.getTitle(), advertisement.getImageUrls().get(0), advertisement.getPrice());
     }
 }

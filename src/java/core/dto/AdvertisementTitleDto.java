@@ -15,4 +15,5 @@ public class AdvertisementTitleDto implements Serializable {
     private Long id;
     private String title;
     private String firstImage;
+    private Float price;
 }

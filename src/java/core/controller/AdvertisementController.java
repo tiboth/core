@@ -4,7 +4,6 @@ import core.dto.AdvertisementCommentDto;
 import core.dto.AdvertisementInfoDto;
 import core.dto.AdvertisementTitleDto;
 import core.dto.FilterDto;
-import core.repository.AdvertisementRepository;
 import core.service.AdvertisementService;
 import core.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +57,7 @@ public class AdvertisementController {
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody
     List<AdvertisementCommentDto> getCommentsForAdvertisement(@PathVariable(value = "id") Long id) {
-        return commentService.getCommentsForAdvertiesement(id);
+        return commentService.getCommentsForAdvertisement(id);
     }
 
     @PostMapping("{id}/comment")

@@ -26,7 +26,7 @@ public class CommentService {
         this.advertisementCommentHelper = advertisementCommentHelper;
     }
 
-    public List<AdvertisementCommentDto> getCommentsForAdvertiesement(Long id) {
+    public List<AdvertisementCommentDto> getCommentsForAdvertisement(Long id) {
         return advertisementCommentRepository.findAllByAdvertisementId(id).stream().map(advertisementCommentHelper::mapAdvertisementCommentToAdvertisementCommentDto).collect(Collectors.toList());
     }
 

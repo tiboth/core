@@ -1,6 +1,5 @@
 package core.dto;
 
-import core.entity.Advertisement;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
