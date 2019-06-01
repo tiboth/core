@@ -8,6 +8,7 @@ import core.service.AdvertisementService;
 import core.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,11 +20,13 @@ import java.util.List;
 public class AdvertisementController {
     private final AdvertisementService advertisementService;
     private final CommentService commentService;
+    private final SimpMessagingTemplate template;
 
     @Autowired
-    public AdvertisementController(AdvertisementService advertisementService, CommentService commentService) {
+    public AdvertisementController(AdvertisementService advertisementService, CommentService commentService, SimpMessagingTemplate template) {
         this.advertisementService = advertisementService;
         this.commentService = commentService;
+        this.template = template;
     }
 
     @GetMapping("/{minPrice}/{maxPrice}/{nrRooms}/{isNew}/{isOld}/{isOwner}/{isAgent}/{page}/{sortBy}")
@@ -70,6 +73,8 @@ public class AdvertisementController {
     public @ResponseBody
     AdvertisementCommentDto saveCommentForAdvertisement(@PathVariable(value = "id") Long id, @RequestBody AdvertisementCommentDto comment) {
         comment.setAdvertisementId(id);
-        return commentService.saveCommentForAdvertisement(comment);
+        AdvertisementCommentDto advertisementCommentDto = commentService.saveCommentForAdvertisement(comment);
+        template.convertAndSend("/comment", commentService.getCommentsForAdvertisement(id));
+        return advertisementCommentDto;
     }
 }
