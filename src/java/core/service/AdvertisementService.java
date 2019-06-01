@@ -8,6 +8,7 @@ import core.repository.AdvertisementRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public class AdvertisementService {
     }
 
     public List<AdvertisementTitleDto> filterAdvertisements(FilterDto filterDto) {
-        Pageable pageable = PageRequest.of(filterDto.getFrom(),20);
+        Pageable pageable = PageRequest.of(filterDto.getFrom(),20, Sort.by(filterDto.getSortBy()));
         return advertisementRepository.findByPriceBetweenAndDescriptionNumberOfRooms(filterDto.getMinPrice(), filterDto.getMaxPrice(),
                 filterDto.getNumberOfRooms(), pageable).stream().map(advertisementTitleHelper::mapAdvertisement).collect(Collectors.toList());
     }

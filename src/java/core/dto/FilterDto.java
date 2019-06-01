@@ -14,8 +14,9 @@ public class FilterDto {
     private boolean isNew;
     private boolean isOld;
     private Integer from;
+    private String sortBy;
 
-    public FilterDto(Float minPrice, Float maxPrice, Integer numberOfRooms, boolean soldByOwner, boolean soldByAgent, boolean isNew, boolean isOld, Integer from) {
+    public FilterDto(Float minPrice, Float maxPrice, Integer numberOfRooms, boolean soldByOwner, boolean soldByAgent, boolean isNew, boolean isOld, Integer from, String sortBy) {
         this.minPrice = minPrice;
         this.maxPrice = maxPrice;
         this.soldByOwner = soldByOwner;
@@ -23,6 +24,7 @@ public class FilterDto {
         this.isNew = isNew;
         this.isOld = isOld;
         this.from = from;
+        this.sortBy = sortBy;
         setNumberOfRooms(numberOfRooms);
     }
 
