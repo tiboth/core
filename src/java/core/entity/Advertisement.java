@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Currency;
 import java.util.List;
 import java.util.Set;
@@ -33,6 +34,9 @@ public class Advertisement {
 
     @Column(nullable = false)
     private Currency currency;
+
+    @Column
+    private LocalDate date;
 
     @OneToOne(cascade = CascadeType.ALL,
             mappedBy = "advertisement")
