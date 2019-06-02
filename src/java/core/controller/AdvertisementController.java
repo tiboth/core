@@ -1,9 +1,6 @@
 package core.controller;
 
-import core.dto.AdvertisementCommentDto;
-import core.dto.AdvertisementInfoDto;
-import core.dto.AdvertisementTitleDto;
-import core.dto.FilterDto;
+import core.dto.*;
 import core.service.AdvertisementService;
 import core.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,29 +26,29 @@ public class AdvertisementController {
         this.template = template;
     }
 
-    @GetMapping("/{minPrice}/{maxPrice}/{nrRooms}/{isNew}/{isOld}/{isOwner}/{isAgent}/{page}/{sortBy}")
+    @GetMapping("/{minPrice}/{maxPrice}/{nrRooms}/{constructionYear}/{distributor}/{page}/{sortBy}")
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody
-    List<AdvertisementTitleDto> getFilteredAndPaginatedAdvertisements(@PathVariable(value = "maxPrice") Float maxPrice, @PathVariable(value = "minPrice") Float minPrice,
-                                                                      @PathVariable(value = "nrRooms") Integer nrRooms, @PathVariable(value = "isNew") boolean isNew,
-                                                                      @PathVariable(value = "isOld") boolean isOld, @PathVariable(value = "isOwner") boolean isOwner,
-                                                                      @PathVariable(value = "isAgent") boolean isAgent, @PathVariable(value = "page") Integer page,
+    List<AdvertisementTitleDto> getFilteredAndPaginatedAdvertisements(@PathVariable(value = "minPrice") Float maxPrice, @PathVariable(value = "maxPrice") Float minPrice,
+                                                                      @PathVariable(value = "nrRooms") Integer nrRooms,
+                                                                      @PathVariable(value = "constructionYear") ConstructionYear constructionYear,
+                                                                      @PathVariable(value = "distributor") Distributor distributor,
+                                                                      @PathVariable(value = "page") Integer page,
                                                                       @PathVariable(value = "sortBy") boolean sortBy) {
         if (sortBy) {
-            return advertisementService.filterAdvertisements(new FilterDto(minPrice, maxPrice, nrRooms, isOwner, isAgent, isNew, isOld, page, "price"));
+            return advertisementService.filterAdvertisements(new FilterDto(minPrice, maxPrice, nrRooms, constructionYear, distributor, page, "price"));
         } else {
-            return advertisementService.filterAdvertisements(new FilterDto(minPrice, maxPrice, nrRooms, isOwner, isAgent, isNew, isOld, page, "date"));
+            return advertisementService.filterAdvertisements(new FilterDto(minPrice, maxPrice, nrRooms, constructionYear, distributor, page, "date"));
         }
     }
 
-    @GetMapping("/count/{minPrice}/{maxPrice}/{nrRooms}/{isNew}/{isOld}/{isOwner}/{isAgent}")
+    @GetMapping("/count/{minPrice}/{maxPrice}/{nrRooms}/{constructionYear}/{distributor}")
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody
-    int countAnnouncements(@PathVariable(value = "maxPrice") Float maxPrice, @PathVariable(value = "minPrice") Float minPrice,
-                           @PathVariable(value = "nrRooms") Integer nrRooms, @PathVariable(value = "isNew") boolean isNew,
-                           @PathVariable(value = "isOld") boolean isOld, @PathVariable(value = "isOwner") boolean isOwner,
-                           @PathVariable(value = "isAgent") boolean isAgent) {
-        return advertisementService.countNumberOfAnnouncementsFound(new FilterDto(minPrice, maxPrice, nrRooms, isOwner, isAgent, isNew, isOld));
+    int countAnnouncements(@PathVariable(value = "minPrice") Float maxPrice, @PathVariable(value = "maxPrice") Float minPrice,
+                           @PathVariable(value = "nrRooms") Integer nrRooms,  @PathVariable(value = "constructionYear") ConstructionYear constructionYear,
+                           @PathVariable(value = "distributor") Distributor distributor) {
+        return advertisementService.countNumberOfAnnouncementsFound(new FilterDto(minPrice, maxPrice, nrRooms, constructionYear, distributor));
     }
 
     @GetMapping("{id}")

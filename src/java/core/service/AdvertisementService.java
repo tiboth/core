@@ -30,14 +30,14 @@ public class AdvertisementService {
     }
 
     public Integer countNumberOfAnnouncementsFound(FilterDto filterDto) {
-        return advertisementRepository.countAdvertisementByPriceBetweenAndDescriptionNumberOfRooms(filterDto.getMinPrice(), filterDto.getMaxPrice(),
-                filterDto.getNumberOfRooms());
+        return advertisementRepository.countAdvertisementByPriceBetweenAndDescriptionNumberOfRoomsAndDescriptionDistributorAndDescriptionConstructionYear(filterDto.getMinPrice(), filterDto.getMaxPrice(),
+                filterDto.getNumberOfRooms(), filterDto.getDistributor().getDistributor(), filterDto.getConstructionYear().getConstructionYear());
     }
 
     public List<AdvertisementTitleDto> filterAdvertisements(FilterDto filterDto) {
-        Pageable pageable = PageRequest.of(filterDto.getFrom(),20, Sort.by(filterDto.getSortBy()));
-        return advertisementRepository.findByPriceBetweenAndDescriptionNumberOfRooms(filterDto.getMinPrice(), filterDto.getMaxPrice(),
-                filterDto.getNumberOfRooms(), pageable).stream().map(advertisementTitleHelper::mapAdvertisement).collect(Collectors.toList());
+        Pageable pageable = PageRequest.of(filterDto.getFrom(), 20, Sort.by(filterDto.getSortBy()));
+        return advertisementRepository.findByPriceBetweenAndDescriptionNumberOfRoomsAndDescriptionDistributorAndDescriptionConstructionYear(filterDto.getMinPrice(), filterDto.getMaxPrice(),
+                filterDto.getNumberOfRooms(), filterDto.getDistributor().getDistributor(), filterDto.getConstructionYear().getConstructionYear(), pageable).stream().map(advertisementTitleHelper::mapAdvertisement).collect(Collectors.toList());
     }
 
     public AdvertisementInfoDto getAdvertisement(Long id) {

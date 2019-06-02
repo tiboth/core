@@ -9,32 +9,26 @@ public class FilterDto {
     private Float minPrice;
     private Float maxPrice;
     private String numberOfRooms;
-    private boolean soldByOwner;
-    private boolean soldByAgent;
-    private boolean isNew;
-    private boolean isOld;
+    private ConstructionYear constructionYear;
+    private Distributor distributor;
     private Integer from;
     private String sortBy;
 
-    public FilterDto(Float minPrice, Float maxPrice, Integer numberOfRooms, boolean soldByOwner, boolean soldByAgent, boolean isNew, boolean isOld, Integer from, String sortBy) {
+    public FilterDto(Float minPrice, Float maxPrice, Integer numberOfRooms, ConstructionYear constructionYear, Distributor distributor, Integer from, String sortBy) {
         this.minPrice = minPrice;
         this.maxPrice = maxPrice;
-        this.soldByOwner = soldByOwner;
-        this.soldByAgent = soldByAgent;
-        this.isNew = isNew;
-        this.isOld = isOld;
+        this.constructionYear = constructionYear;
+        this.distributor = distributor;
         this.from = from;
         this.sortBy = sortBy;
         setNumberOfRooms(numberOfRooms);
     }
 
-    public FilterDto(Float minPrice, Float maxPrice, Integer numberOfRooms, boolean soldByOwner, boolean soldByAgent, boolean isNew, boolean isOld) {
+    public FilterDto(Float minPrice, Float maxPrice, Integer numberOfRooms, ConstructionYear constructionYear, Distributor distributor) {
         this.minPrice = minPrice;
         this.maxPrice = maxPrice;
-        this.soldByOwner = soldByOwner;
-        this.soldByAgent = soldByAgent;
-        this.isNew = isNew;
-        this.isOld = isOld;
+        this.constructionYear = constructionYear;
+        this.distributor = distributor;
         setNumberOfRooms(numberOfRooms);
     }
 
