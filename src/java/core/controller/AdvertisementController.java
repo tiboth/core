@@ -48,10 +48,10 @@ public class AdvertisementController {
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody
     int countAnnouncements(@PathVariable(value = "maxPrice") Float maxPrice, @PathVariable(value = "minPrice") Float minPrice,
-                            @PathVariable(value = "nrRooms") Integer nrRooms, @PathVariable(value = "isNew") boolean isNew,
-                            @PathVariable(value = "isOld") boolean isOld, @PathVariable(value = "isOwner") boolean isOwner,
-                            @PathVariable(value = "isAgent") boolean isAgent) {
-        return  advertisementService.countNumberOfAnnouncementsFound(new FilterDto(minPrice, maxPrice, nrRooms, isOwner, isAgent, isNew, isOld));
+                           @PathVariable(value = "nrRooms") Integer nrRooms, @PathVariable(value = "isNew") boolean isNew,
+                           @PathVariable(value = "isOld") boolean isOld, @PathVariable(value = "isOwner") boolean isOwner,
+                           @PathVariable(value = "isAgent") boolean isAgent) {
+        return advertisementService.countNumberOfAnnouncementsFound(new FilterDto(minPrice, maxPrice, nrRooms, isOwner, isAgent, isNew, isOld));
     }
 
     @GetMapping("{id}")
@@ -74,7 +74,7 @@ public class AdvertisementController {
     AdvertisementCommentDto saveCommentForAdvertisement(@PathVariable(value = "id") Long id, @RequestBody AdvertisementCommentDto comment) {
         comment.setAdvertisementId(id);
         AdvertisementCommentDto advertisementCommentDto = commentService.saveCommentForAdvertisement(comment);
-        template.convertAndSend("/comment", commentService.getCommentsForAdvertisement(id));
+        template.convertAndSend("/comment/" + id, commentService.getCommentsForAdvertisement(id));
         return advertisementCommentDto;
     }
 }
