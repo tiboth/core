@@ -38,4 +38,5 @@ public class FilterDto {
         else
             this.numberOfRooms = "4 sau mai multe";
     }
+
 }

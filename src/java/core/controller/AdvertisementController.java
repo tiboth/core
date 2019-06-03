@@ -31,14 +31,14 @@ public class AdvertisementController {
     public @ResponseBody
     List<AdvertisementTitleDto> getFilteredAndPaginatedAdvertisements(@PathVariable(value = "minPrice") Float maxPrice, @PathVariable(value = "maxPrice") Float minPrice,
                                                                       @PathVariable(value = "nrRooms") Integer nrRooms,
-                                                                      @PathVariable(value = "constructionYear") ConstructionYear constructionYear,
-                                                                      @PathVariable(value = "distributor") Distributor distributor,
+                                                                      @PathVariable(value = "constructionYear") String constructionYear,
+                                                                      @PathVariable(value = "distributor") String distributor,
                                                                       @PathVariable(value = "page") Integer page,
                                                                       @PathVariable(value = "sortBy") boolean sortBy) {
         if (sortBy) {
-            return advertisementService.filterAdvertisements(new FilterDto(minPrice, maxPrice, nrRooms, constructionYear, distributor, page, "price"));
+            return advertisementService.filterAdvertisements(new FilterDto(minPrice, maxPrice, nrRooms, ConstructionYear.get(constructionYear), Distributor.get(distributor), page, "price"));
         } else {
-            return advertisementService.filterAdvertisements(new FilterDto(minPrice, maxPrice, nrRooms, constructionYear, distributor, page, "date"));
+            return advertisementService.filterAdvertisements(new FilterDto(minPrice, maxPrice, nrRooms, ConstructionYear.get(constructionYear), Distributor.get(distributor), page, "date"));
         }
     }
 
@@ -46,9 +46,9 @@ public class AdvertisementController {
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody
     int countAnnouncements(@PathVariable(value = "minPrice") Float maxPrice, @PathVariable(value = "maxPrice") Float minPrice,
-                           @PathVariable(value = "nrRooms") Integer nrRooms,  @PathVariable(value = "constructionYear") ConstructionYear constructionYear,
-                           @PathVariable(value = "distributor") Distributor distributor) {
-        return advertisementService.countNumberOfAnnouncementsFound(new FilterDto(minPrice, maxPrice, nrRooms, constructionYear, distributor));
+                           @PathVariable(value = "nrRooms") Integer nrRooms,  @PathVariable(value = "constructionYear") String constructionYear,
+                           @PathVariable(value = "distributor") String distributor) {
+        return advertisementService.countNumberOfAnnouncementsFound(new FilterDto(minPrice, maxPrice, nrRooms,ConstructionYear.get(constructionYear), Distributor.get(distributor)));
     }
 
     @GetMapping("{id}")
